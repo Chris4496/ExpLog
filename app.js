@@ -41,7 +41,7 @@ function init() {
 
   // Register service worker
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').catch(() => {});
+    navigator.serviceWorker.register('/ExpLog/sw.js', { scope: '/ExpLog/' }).catch(() => {});
   }
 }
 

@@ -1,12 +1,13 @@
-const CACHE_NAME = 'explog-v1';
+const CACHE_NAME = 'explog-v2';
+const BASE = '/ExpLog/';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/app.js',
-  '/manifest.json',
-  '/icons/icon-192.svg',
-  '/icons/icon-512.svg'
+  BASE,
+  BASE + 'index.html',
+  BASE + 'style.css',
+  BASE + 'app.js',
+  BASE + 'manifest.json',
+  BASE + 'icons/icon-192.svg',
+  BASE + 'icons/icon-512.svg'
 ];
 
 // Install
