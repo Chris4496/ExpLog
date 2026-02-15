@@ -1,0 +1,470 @@
+/* Reset & Base */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #f5f5f7;
+  --surface: #ffffff;
+  --surface-2: #e8e8ed;
+  --accent: #6c63ff;
+  --accent-light: #5a52d5;
+  --text: #1a1a2e;
+  --text-muted: #6e6e80;
+  --danger: #e53935;
+  --success: #43a047;
+  --radius: 12px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --input-bar-height: 130px;
+}
+
+html {
+  font-size: 16px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+#app {
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  position: relative;
+}
+
+/* Header */
+.header {
+  padding: 20px 20px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--surface-2);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.header h1 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+}
+
+.btn-export {
+  background: none;
+  border: 1px solid var(--surface-2);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-export:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.btn-export:active {
+  transform: scale(0.97);
+}
+
+.month-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.month-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.month-total {
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Expense Form - Fixed at bottom */
+.expense-form {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  padding: 12px 20px;
+  padding-bottom: calc(12px + var(--safe-bottom));
+  background: var(--surface);
+  border-top: 1px solid var(--surface-2);
+  z-index: 20;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.input-row.secondary {
+  margin-top: 8px;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.amount-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 0 14px;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.amount-wrapper:focus-within {
+  border-color: var(--accent);
+}
+
+.currency-symbol {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-right: 4px;
+}
+
+#amountInput {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 12px 0;
+  outline: none;
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+
+#amountInput::placeholder {
+  color: var(--text-muted);
+  opacity: 0.4;
+}
+
+/* Remove number input spinners */
+#amountInput::-webkit-inner-spin-button,
+#amountInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#amountInput[type=number] {
+  -moz-appearance: textfield;
+}
+
+.btn-add {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius);
+  border: none;
+  background: var(--accent);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 300;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.1s;
+  flex-shrink: 0;
+}
+
+.btn-add:active {
+  transform: scale(0.95);
+  background: var(--accent-light);
+}
+
+#noteInput {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg);
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 0.9rem;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#noteInput:focus {
+  border-color: var(--accent);
+}
+
+#noteInput::placeholder {
+  color: var(--text-muted);
+  opacity: 0.4;
+}
+
+#categorySelect {
+  background: var(--bg);
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 0.85rem;
+  padding: 10px 12px;
+  outline: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  max-width: 40%;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+#categorySelect:focus {
+  border-color: var(--accent);
+}
+
+/* Expense List */
+.expense-list {
+  flex: 1;
+  padding: 8px 20px;
+  padding-bottom: calc(var(--input-bar-height) + 20px + var(--safe-bottom));
+  overflow-y: auto;
+}
+
+.day-group {
+  margin-top: 16px;
+}
+
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  margin-bottom: 4px;
+}
+
+.day-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.day-total {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.expense-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  margin-bottom: 6px;
+  transition: transform 0.15s, opacity 0.3s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.expense-item.removing {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.expense-category {
+  font-size: 1.3rem;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.expense-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.expense-note {
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.expense-time {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.expense-amount {
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.expense-delete {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: var(--danger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: width 0.2s;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.expense-item.swiped .expense-delete {
+  width: 70px;
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.empty-state p {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.empty-hint {
+  font-size: 0.85rem !important;
+  margin-top: 4px;
+  opacity: 0.6;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: calc(var(--input-bar-height) + 16px + var(--safe-bottom));
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--text);
+  color: var(--surface);
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+  z-index: 100;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.toast .undo-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-left: 12px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.expense-item.new {
+  animation: slideIn 0.25s ease-out;
+}
+
+/* Scrollbar */
+.expense-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.expense-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.expense-list::-webkit-scrollbar-thumb {
+  background: var(--surface-2);
+  border-radius: 2px;
+}
+
+/* Desktop adjustments */
+@media (min-width: 481px) {
+  body {
+    background: #ebebf0;
+  }
+
+  #app {
+    border-left: 1px solid var(--surface-2);
+    border-right: 1px solid var(--surface-2);
+  }
+}

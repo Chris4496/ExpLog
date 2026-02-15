@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="description" content="Simple expense tracker">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.svg">
+  <title>ExpLog</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-top">
+        <h1>ExpLog</h1>
+        <button class="btn-export" id="exportBtn" aria-label="Export expenses">
+          📊 Export
+        </button>
+      </div>
+      <div class="month-summary">
+        <span class="month-label" id="monthLabel"></span>
+        <span class="month-total" id="monthTotal">$0.00</span>
+      </div>
+    </header>
+
+    <!-- Expense List -->
+    <main class="expense-list" id="expenseList">
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">📝</div>
+        <p>No expenses yet</p>
+        <p class="empty-hint">Add your first expense below</p>
+      </div>
+    </main>
+
+    <!-- Quick Input - Fixed at bottom -->
+    <form id="expenseForm" class="expense-form" autocomplete="off">
+      <div class="input-row">
+        <div class="amount-wrapper">
+          <span class="currency-symbol">$</span>
+          <input
+            type="number"
+            id="amountInput"
+            placeholder="0.00"
+            step="0.01"
+            min="0"
+            inputmode="decimal"
+            required
+            aria-label="Amount"
+          >
+        </div>
+        <button type="submit" class="btn-add" aria-label="Add expense">+</button>
+      </div>
+      <div class="input-row secondary">
+        <input
+          type="text"
+          id="noteInput"
+          placeholder="What was it for?"
+          maxlength="80"
+          aria-label="Note"
+        >
+        <select id="categorySelect" aria-label="Category">
+          <option value="general">General</option>
+          <option value="food">🍔 Food</option>
+          <option value="transport">🚌 Transport</option>
+          <option value="shopping">🛍️ Shopping</option>
+          <option value="bills">📄 Bills</option>
+          <option value="entertainment">🎬 Entertainment</option>
+          <option value="health">💊 Health</option>
+          <option value="other">📦 Other</option>
+        </select>
+      </div>
+    </form>
+  </div>
+
+  <!-- Delete confirmation toast -->
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
